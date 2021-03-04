@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Desaiah\Preorder\Api\Data\PreorderSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Desaiah\Preorder\Api\GetPreorderByIdentifierInterface" type="Desaiah\Preorder\Model\GetPreorderByIdentifier" />
+    <preference for="Desaiah\Preorder\Api\Data\PreorderInterface" type="Desaiah\Preorder\Model\Preorder" />
+    <preference for="Desaiah\Preorder\Api\PreorderRepositoryInterface" type="Desaiah\Preorder\Model\PreorderRepository" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="preorder_listing_index_data_source" xsi:type="string">Desaiah\Preorder\Model\ResourceModel\Preorder\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Desaiah\Preorder\Model\ResourceModel\Preorder\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">desaiah_preorder</argument>
+            <argument name="eventPrefix" xsi:type="string">desaiah_preorder_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">preorder_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Desaiah\Preorder\Model\ResourceModel\Preorder</argument>
+        </arguments>
+    </type>
+    <virtualType name="PreorderGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Desaiah\Preorder\Api\Data\PreorderInterface" xsi:type="string">Desaiah\Preorder\Api\PreorderRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Desaiah\Preorder\Api\Data\PreorderInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">desaiah_preorder</item>
+                    <item name="identifierField" xsi:type="string">preorder_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Desaiah\Preorder\Api\Data\PreorderInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Desaiah\Preorder\Model\Api\SearchCriteria\CollectionProcessor\PreorderFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Desaiah\Preorder\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\PreorderStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Desaiah\Preorder\Model\Api\SearchCriteria\PreorderCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Desaiah\Preorder\Model\Api\SearchCriteria\CollectionProcessor\PreorderFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Desaiah\Preorder\Model\PreorderRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Desaiah\Preorder\Model\Api\SearchCriteria\PreorderCollectionProcessor</argument>
+        </arguments>
+    </type>
+</config>

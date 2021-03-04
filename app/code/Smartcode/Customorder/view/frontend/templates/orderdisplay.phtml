@@ -1,0 +1,31 @@
+<?php
+    $collection = $this->getTestCollection();
+?><table class="data table" id="test-data-table">
+    <caption class="table-caption">Vky Test Data</caption>
+    <thead>
+        <tr>
+            <th scope="col" class="col title">Order #</th>
+            <th scope="col" class="col author">Date</th>
+            <th scope="col" class="col content">Ship To</th>
+            <th scope="col" class="col created_at">Order Total</th>            
+            <th scope="col" class="col created_at">Status</th>
+            <th scope="col" class="col actions">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($collection as $key => $data): ?>
+            <tr>
+                <td data-th="Title" class="col title"><?php echo $data->getincrement_id(); ?></td> 
+                <td data-th="Title" class="col title"><?php echo $data->getcreated_at(); ?></td> 
+                <td data-th="Title" class="col title"><?php echo $data->getcustomer_firstname(). $data->getcustomer_lastname(); ?></td> 
+                <td data-th="Title" class="col title"><?php echo $data->getgrand_total(); ?></td> 
+                <td data-th="Title" class="col title"><?php echo $data->getstatus(); ?></td> 
+                <td data-th="Actions" class="col actions">
+                    <a href="<?php echo $block->getBaseUrl().'test/index/view/id/'.$data->getincrement_id();?>" class="action view"><span>View Order</span></a>
+
+                    <a href="#"  class="action order"><span>Reorder</span></a>
+                </td>                            
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

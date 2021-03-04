@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Smartcode_Helloworld::helloworld" title="Hello World" module="Smartcode_Helloworld" sortOrder="51" resource="Smartcode_Helloworld::helloworld"/>
+        <add id="Smartcode_Helloworld::post" title="Manage Posts" module="Smartcode_Helloworld" sortOrder="10" action="Smartcode_Helloworld/post" resource="Smartcode_Helloworld::post" parent="Smartcode_Helloworld::helloworld"/>
+        <add id="Smartcode_Helloworld::hello_configuration" title="Configuration" module="Smartcode_Helloworld" sortOrder="99" parent="Smartcode_Helloworld::helloworld" action="adminhtml/system_config/edit/section/helloworld" resource="Smartcode_Helloworld::helloworld_configuration"/>
+    
+    </menu>
+</config>

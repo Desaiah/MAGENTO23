@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceContainer name="header-wrapper">
+			<container name="topbar" as="topbar" label="Topbar" htmlTag="div" htmlClass="top-bar" before="-">
+				<container htmlTag="div" htmlClass="container-width">
+					<block class="Magento\Cms\Block\Block" name="topbar.offer">
+						<arguments>
+							<argument name="block_id" xsi:type="string">tm_topbaroffer</argument>
+						</arguments>
+					</block>
+					<block class="Magento\Cms\Block\Block" name="topbar.link">
+						<arguments>
+							<argument name="block_id" xsi:type="string">tm_topbarlink</argument>
+						</arguments>
+					</block>
+				</container>
+			</container>
+			<container name="header.top" as="header.top" label="Header Top" htmlTag="div" htmlClass="header-top">
+				<container htmlTag="div" htmlClass="container-width">
+					<container name="header.left" as="header.left" label="Header Left" htmlTag="div" htmlClass="header-left">
+						<block class="Magento\Theme\Block\Html\Header\Logo" name="logo">
+							<arguments>
+								<argument name="logo_file" xsi:type="string">images/logo.png</argument>
+							</arguments>
+						</block>
+					</container>
+					<container name="header.center" as="header.center" label="Header Center" htmlTag="div" htmlClass="header-center" after="header.top"></container>
+					<container name="header.right" as="header.right" label="Header Right" htmlTag="div" htmlClass="header-right" after="-">
+						<container name="tm.account" as="tm.account" label="Tm Account" htmlTag="div" htmlClass="tm-account">
+							<block class="Magento\Framework\View\Element\Template" name="myaccount-block" before="-" template="Magento_Theme::myaccount.phtml" />
+							<container name="account.links" as="account.links" label="Account Links" htmlTag="div" htmlClass="account-links"></container>
+						</container>
+						<block class="Magento\Wishlist\Block\Link" name="wish-list-link" after="tm.account"/>
+					</container>
+				</container>
+			</container>
+		</referenceContainer>
+		<move element="top.search" destination="header.center"/>
+		<move element="minicart" destination="header.right" after="-"/>
+		<move element="catalog.compare.link" destination="header.right" before="minicart"/>
+		<move element="header.panel" destination="account.links" before="-"/>
+		<move element="store_language" destination="account.links" after="header.panel"/>
+		<move element="currency" destination="account.links" after="store_language"/>
+		<move element="page.main.title" destination="breadcrumb" before="-"/>
+		<move element="breadcrumbs" destination="breadcrumb" after="-"/>
+		<move element="page.messages" destination="main" after="breadcrumb"/>
+		<move element="catalog.leftnav" destination="sidebar.main" before="catalog.navigation.renderer"/>
+</page>

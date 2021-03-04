@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Desaiah_Preorder::preorder" title="Product Preorder" module="Desaiah_Preorder" sortOrder="99" resource="Desaiah_Preorder::preorder"/>
+        <add id="Desaiah_Preorder::index" title="Manage Preorder" module="Desaiah_Preorder" sortOrder="10" action="preorder/preorder" resource="Desaiah_Preorder::index" parent="Desaiah_Preorder::preorder"/>        
+    </menu>
+</config>
